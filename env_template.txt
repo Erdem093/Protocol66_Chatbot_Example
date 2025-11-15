@@ -1,0 +1,17 @@
+# API Keys for Customer Service Agent Example
+
+# OpenAI API Key (for GPT models)
+OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Anthropic API Key (for Claude models)
+ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Optional: Other service API keys
+SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+DATABASE_URL=postgresql://user:password@localhost:5432/customer_db
+
+# Agent Configuration
+AGENT_NAME=CustomerServiceAgent
+ENVIRONMENT=development
+DEBUG=true
+

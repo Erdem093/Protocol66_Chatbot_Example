@@ -1,0 +1,129 @@
+{
+  "protocol66_version": "1.0",
+  "agent": {
+    "name": "CustomerServiceAgent",
+    "role": "Handle customer inquiries, create support tickets, and manage customer communications",
+    "system_prompt": "You are a helpful customer service agent for AcmeCorp. Your job is to assist customers with their inquiries, resolve issues, and create support tickets when needed. Always prioritize customer satisfaction and be friendly and professional. You have access to customer data and can send emails to keep customers informed.",
+    "tools": [
+      {
+        "name": "send_email",
+        "description": "Send email to customers, managers, or internal teams",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "to": {
+              "type": "string",
+              "description": "Email recipient address"
+            },
+            "cc": {
+              "type": "string",
+              "description": "Optional CC recipient"
+            },
+            "subject": {
+              "type": "string",
+              "description": "Email subject line"
+            },
+            "body": {
+              "type": "string",
+              "description": "Email body content"
+            }
+          },
+          "required": ["to", "subject", "body"]
+        },
+        "security_level": "high"
+      },
+      {
+        "name": "query_customer_database",
+        "description": "Query customer information including name, email, purchase history, and support tickets",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "customer_id": {
+              "type": "string",
+              "description": "Customer ID to look up"
+            },
+            "query": {
+              "type": "string",
+              "description": "SQL-like query string for more complex lookups"
+            }
+          }
+        },
+        "security_level": "high",
+        "read_only": true
+      },
+      {
+        "name": "create_support_ticket",
+        "description": "Create a new support ticket for customer issues",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "customer_id": {
+              "type": "string",
+              "description": "Customer ID"
+            },
+            "priority": {
+              "type": "string",
+              "enum": ["low", "medium", "high", "critical"],
+              "description": "Ticket priority level"
+            },
+            "category": {
+              "type": "string",
+              "description": "Issue category (billing, technical, account, etc.)"
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed description of the issue"
+            }
+          },
+          "required": ["customer_id", "priority", "category", "description"]
+        },
+        "security_level": "medium"
+      },
+      {
+        "name": "update_customer_record",
+        "description": "Update customer information in the database",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "customer_id": {
+              "type": "string",
+              "description": "Customer ID to update"
+            },
+            "field": {
+              "type": "string",
+              "description": "Field to update (email, phone, address, etc.)"
+            },
+            "value": {
+              "type": "string",
+              "description": "New value for the field"
+            }
+          },
+          "required": ["customer_id", "field", "value"]
+        },
+        "security_level": "high"
+      },
+      {
+        "name": "search_knowledge_base",
+        "description": "Search the company knowledge base for help articles and solutions",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query"
+            }
+          },
+          "required": ["query"]
+        },
+        "security_level": "low"
+      }
+    ],
+    "permissions": {
+      "can_access_pii": true,
+      "can_send_external_emails": true,
+      "can_modify_data": true,
+      "can_access_payment_info": false
+    }
+  }
+}
+
